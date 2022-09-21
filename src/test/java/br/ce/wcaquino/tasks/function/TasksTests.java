@@ -1,19 +1,25 @@
 package br.ce.wcaquino.tasks.function;
 
+import java.net.URL;
+import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import org.junit.Assert;
 
 public class TasksTests {
 	
-	public WebDriver accessarAplicacao() {
+	public WebDriver accessarAplicacao() throws MalformedURLException {
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\PandoraFighter\\Documents\\devops\\cursosJenkins\\chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
+		//WebDriver driver = new ChromeDriver();
+		DesiredCapabilities cap = DesiredCapabilities.chrome();
+		WebDriver driver = new RemoteWebDriver(new URL("http://192.168.5.135:4444/wd/hub"), cap);
 		//driver.get("http://www.google.com");
 		driver.navigate().to("http://192.168.5.135:8001/tasks");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -22,7 +28,7 @@ public class TasksTests {
 	}
 
 	@Test
-	public void testAmbiente() {
+	public void testAmbiente() throws MalformedURLException {
 		
 		WebDriver driver = accessarAplicacao();
 		
@@ -51,7 +57,7 @@ public class TasksTests {
 	}
 	
 	@Test
-	public void naoDeveSalvarTarefaSemDescricao() {
+	public void naoDeveSalvarTarefaSemDescricao() throws MalformedURLException {
 		
 		WebDriver driver = accessarAplicacao();
 		
@@ -77,7 +83,7 @@ public class TasksTests {
 	}
 	
 	@Test
-	public void naoDeveSalvarTarefaSemData() {
+	public void naoDeveSalvarTarefaSemData() throws MalformedURLException {
 		
 		WebDriver driver = accessarAplicacao();
 		
@@ -103,7 +109,7 @@ public class TasksTests {
 	}
 	
 	@Test
-	public void naoDeveSalvarTarefaComDataPAssada() {
+	public void naoDeveSalvarTarefaComDataPAssada() throws MalformedURLException {
 		
 		WebDriver driver = accessarAplicacao();
 		
