@@ -161,7 +161,7 @@ public class TasksTests {
 			//a[@class='btn btn-outline-danger btn-sm']
 			((WebElement) driver.findElements(By.xpath("//a[@class='btn btn-outline-danger btn-sm']"))).click();
 			message = driver.findElement(By.id("message")).getText();
-			Assert.assertEquals("Sucess!", message);			
+			Assert.assertEquals("Success!", message);			
 		} finally {		
 			// Fechar o Browser
 			driver.quit();
